@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link rel="stylesheet" href="local.css">
+<style>
+:root{--bg:#1a1420;--bg2:#2a1d2b;--gold:#dcb98a;--rose:#f0a9b8;--blush:#f2cfc6;--cream:#faf2ea;--muted:#d3c3bd;--line:rgba(220,185,138,.5)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg)}
+body{font-family:'Zen Kaku Gothic New',sans-serif;color:var(--cream)}
+.poster{position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 30%, rgba(240,169,184,.20), transparent 42%),
+    radial-gradient(circle at 70% 18%, rgba(255,214,150,.16), transparent 30%),
+    radial-gradient(ellipse at 0% 100%, rgba(220,185,138,.12), transparent 50%),
+    linear-gradient(165deg,var(--bg2),var(--bg) 65%)}
+.frame{position:absolute;inset:24px;border:2px solid var(--line);border-radius:20px}
+.serif{font-family:'Shippori Mincho B1',serif}
+.logo{display:block}
+.title{font-family:'Shippori Mincho B1',serif;font-weight:800;line-height:1.05;letter-spacing:.01em}
+.title .bar{color:var(--gold)}
+.title .l2{display:block;color:var(--cream)}
+.title .pipe{color:var(--gold);font-weight:500;margin-left:-.25em;margin-right:-.1em}
+.tagline{color:var(--blush);font-weight:500}
+.dates .k{color:var(--gold);font-weight:700;letter-spacing:.1em}
+.dates .v{font-family:'Shippori Mincho B1',serif;font-weight:700}
+.dates .v small{font-size:.58em;font-weight:500}
+.fee .k{color:var(--gold);font-weight:700;letter-spacing:.06em}
+.fee .row{display:flex}
+.fee .item{border-left:2px solid var(--line)}
+.fee .item:first-child{border-left:none;padding-left:0}
+.fee .n{color:var(--muted);font-weight:500}
+.fee .p{font-family:'Shippori Mincho B1',serif;font-weight:700;color:var(--cream)}
+.fee .p span{font-family:'Zen Kaku Gothic New';font-size:.62em;font-weight:700}
+.extra{color:var(--muted);font-weight:500}
+.extra b{color:var(--rose);font-weight:700;margin-right:.6em}
+.tag{color:var(--gold);font-weight:700;letter-spacing:.04em}
+.dm{background:linear-gradient(135deg,#ecd0a4,var(--gold) 50%,#c49a63);color:#2a1a14;font-weight:700;border-radius:999px;text-align:center}
+.dm b{color:#9b2c48}
+.illu{position:absolute}
+
+/* 16:9 */
+.w{width:1920px;height:1080px;padding:70px 90px}
+.w .logo{width:400px}
+.w .title{font-size:188px;margin-top:28px}
+.w .title .l2{font-size:100px;margin-top:6px}
+.w .tagline{font-size:48px;margin-top:22px}
+.w .dates{margin-top:30px;display:flex;align-items:baseline;gap:26px}
+.w .dates .k{font-size:34px}
+.w .dates .v{font-size:66px}
+.w .fee{margin-top:18px}
+.w .fee .k{font-size:28px;margin-bottom:8px}
+.w .fee .item{padding:0 30px}
+.w .fee .item:first-child,.s .fee .item:first-child{padding-left:0}
+.w .fee .n{font-size:28px}
+.w .fee .p{font-size:52px}
+.w .extra{font-size:30px;position:absolute;left:90px;bottom:70px}
+.w .tag{font-size:40px;position:absolute;right:90px;bottom:64px}
+.w .illu{right:80px;top:60px;width:660px;height:587px}
+.w .dm{position:absolute;right:90px;top:720px;font-size:36px;padding:22px 40px;width:780px;line-height:1.45}
+
+.w.discord .illu{top:190px;right:70px;width:740px;height:658px}
+/* 1:1 */
+.s{width:1200px;height:1200px;padding:64px 70px}
+.s .logo{width:330px}
+.s .title{font-size:164px;margin-top:34px}
+.s .title .l2{font-size:86px;margin-top:8px}
+.s .tagline{font-size:44px;margin-top:26px}
+.s .dates{margin-top:34px;display:flex;align-items:baseline;gap:20px}
+.s .dates .k{font-size:30px}
+.s .dates .v{font-size:58px}
+.s .fee{margin-top:26px}
+.s .fee .k{font-size:26px;margin-bottom:6px}
+.s .fee .item{padding:0 22px}
+.s .fee .n{font-size:25px}
+.s .fee .p{font-size:46px}
+.s .extra{font-size:28px;position:absolute;left:70px;bottom:66px}
+.s .tag{font-size:36px;position:absolute;right:70px;bottom:60px}
+.s .illu{right:40px;top:40px;width:470px;height:418px;opacity:.42}
+.s .dm{font-size:34px;padding:18px 30px;margin-top:30px;line-height:1.35}
+</style></head><body><div id="root"></div>
+<script>
+const p=new URLSearchParams(location.search);
+const shape=p.get('shape')||'w', media=p.get('media')||'x';
+const G='#dcb98a', R='#f0a9b8';
+const illu=`<svg class="illu" viewBox="0 0 720 640" fill="none" stroke="${G}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+ <defs><radialGradient id="glow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".45"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient></defs>
+ <!-- arch window / back bar -->
+ <path d="M150 560 V250 Q150 90 360 90 Q570 90 570 250 V560" opacity=".55"/>
+ <path d="M175 560 V255 Q175 115 360 115 Q545 115 545 255 V560" opacity=".25"/>
+ <path d="M175 330 H545 M175 440 H545" opacity=".4"/>
+ <!-- shelf bottles (generic) -->
+ <g opacity=".55" stroke-width="3">
+  <path d="M210 330 v-46 q0-12 10-16 v-22 h12 v22 q10 4 10 16 v46"/>
+  <path d="M262 330 v-60 h28 v60"/><path d="M270 270 v-20 h12 v20"/>
+  <path d="M312 330 v-38 q0-14 16-14 q16 0 16 14 v38"/>
+  <path d="M400 330 v-52 q0-10 9-14 v-26 h10 v26 q9 4 9 14 v52"/>
+  <path d="M450 330 v-34 h40 v34"/><path d="M456 296 v-10 h28 v10"/>
+  <path d="M220 440 v-40 h30 v40"/><path d="M268 440 v-56 q0-10 9-12 v-18 h10 v18 q9 2 9 12 v56"/>
+  <path d="M430 440 v-44 q0-12 14-12 q14 0 14 12 v44"/><path d="M478 440 v-58 h26 v58"/>
+ </g>
+ <!-- pendant lamp -->
+ <path d="M360 0 V150"/><path d="M318 190 Q360 140 402 190 Z" fill="rgba(220,185,138,.25)"/>
+ <ellipse cx="360" cy="290" rx="230" ry="150" fill="url(#glow)" stroke="none"/>
+ <!-- counter -->
+ <path d="M40 560 H680" stroke-width="4"/><path d="M60 590 H660" opacity=".4"/>
+ <!-- two coupe glasses -->
+ <g>
+  <path d="M220 430 Q270 492 320 430 Z" fill="rgba(240,169,184,.35)" stroke="${G}"/>
+  <path d="M270 470 V548 M240 556 Q270 546 300 556"/>
+  <circle cx="306" cy="420" r="9" fill="#c94f6d" stroke="#c94f6d"/><path d="M306 411 q6-16 20-22" stroke-width="2.5"/>
+  <path d="M340 440 Q390 502 440 440 Z" fill="rgba(255,214,150,.3)" stroke="${G}"/>
+  <path d="M390 480 V548 M360 556 Q390 546 420 556"/>
+ </g>
+ <!-- cosmetics: dropper, jar, compact -->
+ <g stroke="${R}">
+  <rect x="490" y="470" width="40" height="80" rx="10" fill="rgba(240,169,184,.15)"/>
+  <rect x="499" y="452" width="22" height="18" rx="3"/><path d="M504 452 q0-20 6-20 q6 0 6 20"/>
+  <rect x="548" y="520" width="50" height="34" rx="7" fill="rgba(240,169,184,.15)"/><rect x="544" y="508" width="58" height="13" rx="5"/>
+  <ellipse cx="150" cy="545" rx="42" ry="11" fill="rgba(240,169,184,.12)"/><path d="M108 545 v-10 q42-16 84 0 v10"/>
+ </g>
+ <!-- sparkles -->
+ <g stroke="${G}" stroke-width="2.5"><path d="M600 120 v26 M587 133 h26"/><path d="M110 200 v18 M101 209 h18"/><path d="M640 330 v16 M632 338 h16"/></g>
+</svg>`;
+const dm = media==='x' ? `<div class="dm"><b>いいね・リプ</b>をくれた方に、<br>DMで詳細とアンケートをお送りします</div>` : '';
+const fee = `<div class="fee"><div class="k">料金（各部・チャージ込み）</div><div class="row">
+  <div class="item"><div class="n">2杯付き</div><div class="p">3,000<span>円</span></div></div>
+  <div class="item"><div class="n">ソフトドリンク飲み放題</div><div class="p">3,500<span>円</span></div></div>
+  <div class="item"><div class="n">アルコール飲み放題</div><div class="p">4,500<span>円</span></div></div></div></div>`;
+const html = `<div class="poster ${shape} ${media}"><div class="frame"></div>${illu}
+ <img class="logo" src="logo_h.png" alt="VRC美肌部">
+ <div class="title">美肌部<span class="bar">BAR</span><span class="l2"><span class="pipe">｜</span>中野インスタンス</span></div>
+ <div class="tagline">中野のバーを貸し切って、リアルで交流する夜</div>
+ <div class="dates"><span class="k">候補日</span><span class="v">11/23<small>（月・祝）</small>／11/29<small>（日）</small></span></div>
+ ${fee}
+ ${shape==='s'?dm:''}
+ <div class="extra"><b>こんな楽しみも</b>コスメやサンプルのお試し／美肌部グッズ</div>
+ <div class="tag">#VRC美肌部</div>
+ ${shape==='w'?dm:''}
+</div>`;
+document.getElementById('root').innerHTML=html;
+</script></body></html>
